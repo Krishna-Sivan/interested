@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:interested/Auth/EnterNumber.dart';
-import 'package:interested/Backend/backend.dart';
-import 'package:interested/Usefull/Functions.dart';
-import 'package:interested/Usefull/colors.dart';
+import 'package:Krishna/Auth/EnterNumber.dart';
+import 'package:Krishna/Backend/backend.dart';
+import 'package:Krishna/Usefull/Functions.dart';
+import 'package:Krishna/Usefull/colors.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MaterialApp(
@@ -30,12 +30,11 @@ class _splashState extends State<splash> {
     check();
   }
 
-  check() async{
-    FirebaseAuth user =  await FirebaseAuth.instance;
-    if(user.currentUser != null){
+  check() async {
+    FirebaseAuth user = await FirebaseAuth.instance;
+    if (user.currentUser != null) {
       checker(context);
-    }
-    else{
+    } else {
       navScreen(enterMobile(), context, true);
     }
   }
@@ -49,7 +48,6 @@ class _splashState extends State<splash> {
           children: [
             circles(context),
             textr(context, "be one"),
-
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,12 +55,11 @@ class _splashState extends State<splash> {
                 Row(
                   children: [
                     Spacer(),
-                    mainText("interested", mainColor, 20.0, FontWeight.normal, 1),
+                    mainText("Krishna", mainColor, 20.0, FontWeight.normal, 1),
                     Spacer(),
                   ],
                 ),
                 // mainText("be one", secColor, 15.0, FontWeight.bold, 1),
-
               ],
             ),
           ],
@@ -70,6 +67,4 @@ class _splashState extends State<splash> {
       ),
     );
   }
-
-
 }

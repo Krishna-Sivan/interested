@@ -14,7 +14,8 @@ Color errorColor = Color(0xFFFFFFFF);
 
 Color transparent_overlay = Color(0xFFFFFF);
 
-AutoSizeText mainText(String text, Color c, double size, FontWeight w,int lines) {
+AutoSizeText mainText(
+    String text, Color c, double size, FontWeight w, int lines) {
   return AutoSizeText(
     text,
     textAlign: TextAlign.center,
@@ -25,12 +26,12 @@ AutoSizeText mainText(String text, Color c, double size, FontWeight w,int lines)
       fontSize: size,
       fontFamily: mainFont,
       fontWeight: w,
-
     ),
   );
 }
 
-AutoSizeText mainTextLines(String text, Color c, double size, FontWeight w,int lines) {
+AutoSizeText mainTextLines(
+    String text, Color c, double size, FontWeight w, int lines) {
   return AutoSizeText(
     text,
     textAlign: TextAlign.start,
@@ -41,11 +42,9 @@ AutoSizeText mainTextLines(String text, Color c, double size, FontWeight w,int l
       fontSize: size,
       fontFamily: mainFont,
       fontWeight: w,
-
     ),
   );
 }
-
 
 class loader extends StatelessWidget {
   const loader({Key? key}) : super(key: key);
@@ -67,8 +66,11 @@ class loader extends StatelessWidget {
             padding: EdgeInsets.all(20.0),
             child: Column(
               children: [
-                mainText("This may take a while...Please Wait", Colors.white, 15.0, FontWeight.normal, 1),
-                SizedBox(height: 3.0,),
+                mainText("This may take a while...Please Wait", Colors.white,
+                    15.0, FontWeight.normal, 1),
+                SizedBox(
+                  height: 3.0,
+                ),
                 CircularProgressIndicator(
                   backgroundColor: mainColor,
                   color: Colors.white,
@@ -83,8 +85,7 @@ class loader extends StatelessWidget {
   }
 }
 
-
-Widget loaderss(bool a,BuildContext context){
+Widget loaderss(bool a, BuildContext context) {
   return Visibility(
       visible: a,
       child: Stack(
@@ -105,27 +106,28 @@ Widget loaderss(bool a,BuildContext context){
       ));
 }
 
-void snacker(String s, BuildContext c){
+void snacker(String s, BuildContext c) {
   ScaffoldMessenger.of(c).showSnackBar(SnackBar(
       elevation: 0,
       duration: Duration(seconds: 2),
       behavior: SnackBarBehavior.floating,
       backgroundColor: mainlight,
-      content:
-      Text(s)));
+      content: Text(s)));
 }
 
-toaster(String msg){
-  Fluttertoast.showToast(msg: msg,
+toaster(String msg) {
+  Fluttertoast.showToast(
+      msg: msg,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
       textColor: Colors.white,
       backgroundColor: mainColor);
-
 }
 
-dialogLoader(BuildContext context,) async{
+dialogLoader(
+  BuildContext context,
+) async {
   await showDialog(
     context: context,
     builder: (context) => new AlertDialog(
@@ -140,165 +142,161 @@ dialogLoader(BuildContext context,) async{
   );
 }
 
-Widget circles(BuildContext context){
+Widget circles(BuildContext context) {
   return Stack(
-    clipBehavior: Clip.hardEdge, children: [
+    clipBehavior: Clip.hardEdge,
+    children: [
       Container(
         // margin: EdgeInsets.only(),
 
-        child:
-        Transform.translate(
+        child: Transform.translate(
+          offset: Offset(
+            -70.0,
+            -120.0,
+          ),
+          child: CircleAvatar(
+            backgroundColor: bglight,
+            radius: 130.0,
+          ),
+        ),
+      ),
+      Container(
+        // margin: EdgeInsets.only(),
+
+        child: Transform.translate(
+          offset: Offset(
+            MediaQuery.of(context).size.width - 200.0,
+            MediaQuery.of(context).size.height - 200.0,
+          ),
+          child: CircleAvatar(
+            backgroundColor: bglight,
+            radius: 130.0,
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget circlesleft(BuildContext context) {
+  return Stack(
+    clipBehavior: Clip.hardEdge,
+    children: [
+      Container(
+        // margin: EdgeInsets.only(),
+
+        child: Transform.translate(
+          offset: Offset(
+            MediaQuery.of(context).size.width - 200.0,
+            -120.0,
+          ),
+          child: CircleAvatar(
+            backgroundColor: bglight,
+            radius: 130.0,
+          ),
+        ),
+      ),
+      Container(
+        child: Transform.translate(
+          offset: Offset(
+            -70,
+            MediaQuery.of(context).size.height - 200.0,
+          ),
+          child: CircleAvatar(
+            backgroundColor: bglight,
+            radius: 130.0,
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget dynamicCorners(BuildContext context, IconData a) {
+  return Stack(
+    clipBehavior: Clip.hardEdge,
+    children: [
+      Container(
+        // margin: EdgeInsets.only(),
+
+        child: Transform.translate(
             offset: Offset(
-              -70.0,
-              -120.0,
+              MediaQuery.of(context).size.width - 200.0,
+              -100.0,
             ),
-            child: CircleAvatar(
-              backgroundColor: bglight,
-              radius: 130.0,
+            child: Container(
+              child: Icon(
+                a,
+                color: bglight,
+                size: 250.0,
+              ),
+            )),
+      ),
+      Container(
+        child: Transform.translate(
+            offset: Offset(
+              -50,
+              MediaQuery.of(context).size.height - 250.0,
             ),
-        ),
+            child: Container(
+              child: Icon(
+                a,
+                color: bglight,
+                size: 250.0,
+              ),
+            )),
       ),
-    Container(
-      // margin: EdgeInsets.only(),
-
-      child:
-      Transform.translate(
-        offset: Offset(
-          MediaQuery.of(context).size.width - 200.0,
-          MediaQuery.of(context).size.height - 200.0,
-        ),
-        child: CircleAvatar(
-          backgroundColor: bglight,
-          radius: 130.0,
-        ),
-      ),
-    ),
-
-  ],
+    ],
   );
 }
 
-Widget circlesleft(BuildContext context){
-  return Stack(
-    clipBehavior: Clip.hardEdge, children: [
-    Container(
-      // margin: EdgeInsets.only(),
-
-      child:
-      Transform.translate(
-        offset: Offset(
-          MediaQuery.of(context).size.width - 200.0,
-          -120.0,
-        ),
-        child: CircleAvatar(
-          backgroundColor: bglight,
-          radius: 130.0,
-        ),
-      ),
-    ),
-    Container(
-      child:
-      Transform.translate(
-        offset: Offset(
-          -70,
-          MediaQuery.of(context).size.height - 200.0,
-        ),
-        child: CircleAvatar(
-          backgroundColor: bglight,
-          radius: 130.0,
-        ),
-      ),
-    ),
-
-  ],
-  );
-}
-
-Widget dynamicCorners(BuildContext context,IconData a){
-  return Stack(
-    clipBehavior: Clip.hardEdge, children: [
-    Container(
-      // margin: EdgeInsets.only(),
-
-      child:
-      Transform.translate(
-        offset: Offset(
-          MediaQuery.of(context).size.width - 200.0,
-          -100.0,
-        ),
-        child: Container(
-          child: Icon(a,color: bglight,size: 250.0,),
-        )
-      ),
-    ),
-    Container(
-      child:
-      Transform.translate(
-        offset: Offset(
-          -50,
-          MediaQuery.of(context).size.height - 250.0,
-        ),
-        child: Container(
-          child: Icon(a,color: bglight,size: 250.0,),
-        )
-      ),
-    ),
-
-  ],
-  );
-}
-
-
-Widget bottomIn(){
+Widget bottomIn() {
   return Container(
     alignment: Alignment.bottomCenter,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        mainText("interested", mainColor, 15.0, FontWeight.normal, 1),
+        mainText("Krishna", mainColor, 15.0, FontWeight.normal, 1),
         mainText("be one", secColor, 10.0, FontWeight.normal, 1),
-        SizedBox(height: 20.0,)
+        SizedBox(
+          height: 20.0,
+        )
       ],
     ),
   );
 }
 
-Widget textr(BuildContext context,String text){
+Widget textr(BuildContext context, String text) {
   return Stack(
     fit: StackFit.expand,
-    clipBehavior: Clip.hardEdge, children: [
-    Container(
-      // margin: EdgeInsets.only(),
-      child:
-      Transform.translate(
-        offset: Offset(
-          20.0,
-          -100.0,
-        ),
-        child: Transform.rotate(
-          angle: 0.2,
-          child: Wrap(
-            children: [
-              mainText(text, bglight, 100.0, FontWeight.normal, 1),
-              mainText(text, bglight, 100.0, FontWeight.normal, 1),
-              mainText(text, bglight, 100.0, FontWeight.normal, 1),
-              mainText(text, bglight, 100.0, FontWeight.normal, 1),
-              mainText(text, bglight, 100.0, FontWeight.normal, 1),
-              mainText(text, bglight, 100.0, FontWeight.normal, 1),
-              mainText(text, bglight, 100.0, FontWeight.normal, 1),
-              mainText(text, bglight, 100.0, FontWeight.normal, 1),
-              mainText(text, bglight, 100.0, FontWeight.normal, 1),
-              mainText(text, bglight, 100.0, FontWeight.normal, 1),
-
-            ],
-          ),
-        )
+    clipBehavior: Clip.hardEdge,
+    children: [
+      Container(
+        // margin: EdgeInsets.only(),
+        child: Transform.translate(
+            offset: Offset(
+              20.0,
+              -100.0,
+            ),
+            child: Transform.rotate(
+              angle: 0.2,
+              child: Wrap(
+                children: [
+                  mainText(text, bglight, 100.0, FontWeight.normal, 1),
+                  mainText(text, bglight, 100.0, FontWeight.normal, 1),
+                  mainText(text, bglight, 100.0, FontWeight.normal, 1),
+                  mainText(text, bglight, 100.0, FontWeight.normal, 1),
+                  mainText(text, bglight, 100.0, FontWeight.normal, 1),
+                  mainText(text, bglight, 100.0, FontWeight.normal, 1),
+                  mainText(text, bglight, 100.0, FontWeight.normal, 1),
+                  mainText(text, bglight, 100.0, FontWeight.normal, 1),
+                  mainText(text, bglight, 100.0, FontWeight.normal, 1),
+                  mainText(text, bglight, 100.0, FontWeight.normal, 1),
+                ],
+              ),
+            )),
       ),
-    ),
-
-  ],
+    ],
   );
 }
-
-

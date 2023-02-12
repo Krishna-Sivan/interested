@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:interested/Auth/OTPpage.dart';
-import 'package:interested/Usefull/Buttons.dart';
-import 'package:interested/Usefull/Functions.dart';
-import 'package:interested/Usefull/colors.dart';
+import 'package:Krishna/Auth/OTPpage.dart';
+import 'package:Krishna/Usefull/Buttons.dart';
+import 'package:Krishna/Usefull/Functions.dart';
+import 'package:Krishna/Usefull/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 
 class enterMobile extends StatefulWidget {
   const enterMobile({Key? key}) : super(key: key);
@@ -20,7 +19,6 @@ class _enterMobileState extends State<enterMobile> {
   FirebaseAuth _auth = FirebaseAuth.instance;
   late BuildContext mCtx;
 
-
   @override
   void initState() {
     dialogLoader(context);
@@ -35,114 +33,100 @@ class _enterMobileState extends State<enterMobile> {
         body: SafeArea(
           child: Stack(
             children: [
-
               circles(context),
               // textr(context, "interested"),
               SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 30.0,vertical: 20.0),
+                padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: 100.0,),
+                    SizedBox(
+                      height: 100.0,
+                    ),
                     Row(
                       children: [
-                        mainText("Login", mainColor, 35.0, FontWeight.normal, 1),
+                        mainText(
+                            "Login", mainColor, 35.0, FontWeight.normal, 1),
                         Spacer()
                       ],
                     ),
                     Row(
                       children: [
-                        mainText("with mobile number", secColor, 13.0, FontWeight.normal, 1),
+                        mainText("with mobile number", secColor, 13.0,
+                            FontWeight.normal, 1),
                         Spacer(),
                       ],
                     ),
-
-                    SizedBox(height: 80.0,),
+                    SizedBox(
+                      height: 80.0,
+                    ),
                     Form(
                       key: formKey,
-                      child: (
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextFormField(
-                                maxLength: 10,
-                                keyboardType:TextInputType.number,
-                                cursorColor: mainColor,
-
-                                style: TextStyle(
-                                  fontFamily: 'mons',
-                                  fontSize: 15.0,
+                      child: (Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextFormField(
+                            maxLength: 10,
+                            keyboardType: TextInputType.number,
+                            cursorColor: mainColor,
+                            style: TextStyle(
+                              fontFamily: 'mons',
+                              fontSize: 15.0,
+                              color: mainColor,
+                            ),
+                            decoration: InputDecoration(
+                                hintText: "Mobile Number",
+                                suffixIcon: Icon(
+                                  Icons.call,
                                   color: mainColor,
                                 ),
-                                decoration: InputDecoration(
-                                    hintText: "Mobile Number",
-                                    suffixIcon: Icon(Icons.call,color: mainColor,),
-                                    hintStyle: TextStyle(
-                                        fontFamily: 'mons',
-                                        color:secColor
-                                    ),
-                                    labelStyle: TextStyle(
-                                      fontFamily: 'mons',
-                                      color:secColor
-                                    ),
-                                    errorStyle: TextStyle(
-                                        fontFamily: 'mons',
-                                        color: errorColor
-                                    ),
-                                    errorBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: errorColor
-                                        )
-                                    ),
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: mainColor
-                                        )
-                                    )
-                                ),
-
-                                onChanged: (text){
-                                  phone = text;
-                                },
-                                validator: (value){
-                                  if(value!.isEmpty){
-                                    return("Please Enter a Number");
-                                  }
-                                  else if(value.length < 10){
-                                    return("Number should be 10 digits long");
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ],
-                          )
-                      ),
+                                hintStyle: TextStyle(
+                                    fontFamily: 'mons', color: secColor),
+                                labelStyle: TextStyle(
+                                    fontFamily: 'mons', color: secColor),
+                                errorStyle: TextStyle(
+                                    fontFamily: 'mons', color: errorColor),
+                                errorBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: errorColor)),
+                                enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: mainColor))),
+                            onChanged: (text) {
+                              phone = text;
+                            },
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return ("Please Enter a Number");
+                              } else if (value.length < 10) {
+                                return ("Number should be 10 digits long");
+                              }
+                              return null;
+                            },
+                          ),
+                        ],
+                      )),
                     ),
-
-
-
-                    SizedBox(height: 20.0,),
-                    btnsss("GET OTP", () { LoginwithMobile();}, mainColor, Colors.white),
-
-
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    btnsss("GET OTP", () {
+                      LoginwithMobile();
+                    }, mainColor, Colors.white),
                   ],
                 ),
               ),
               bottomIn(),
               loaderss(isHide, context),
-
-
-
             ],
           ),
         ),
       ),
     );
   }
-  Future LoginwithMobile() async{
-    if(formKey.currentState!.validate()){
-      setState((){
+
+  Future LoginwithMobile() async {
+    if (formKey.currentState!.validate()) {
+      setState(() {
         isHide = true;
       });
       await _auth.verifyPhoneNumber(
@@ -161,11 +145,11 @@ class _enterMobileState extends State<enterMobile> {
       // this.otpCode.text = authCredential.smsCode!;
     });
     if (authCredential.smsCode != null) {
-      try{
+      try {
         UserCredential credential =
-        await user!.linkWithCredential(authCredential);
-      }on FirebaseAuthException catch(e){
-        if(e.code == 'provider-already-linked'){
+            await user!.linkWithCredential(authCredential);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'provider-already-linked') {
           await _auth.signInWithCredential(authCredential);
         }
       }
@@ -178,7 +162,7 @@ class _enterMobileState extends State<enterMobile> {
   _onVerificationFailed(FirebaseAuthException exception) {
     print(exception.code);
     if (exception.code == 'invalid-phone-number') {
-      setState((){
+      setState(() {
         isHide = false;
       });
       snacker("Please Enter an Valid Phone Number", mCtx);
@@ -196,5 +180,4 @@ class _enterMobileState extends State<enterMobile> {
   _onCodeTimeout(String timeout) {
     return null;
   }
-
 }

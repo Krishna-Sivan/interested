@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:interested/Usefull/colors.dart';
+import 'package:Krishna/Usefull/colors.dart';
 
 class homeScreen extends StatefulWidget {
   Map data;
-  homeScreen({Key? key,required this.data}) : super(key: key);
+  homeScreen({Key? key, required this.data}) : super(key: key);
 
   @override
   State<homeScreen> createState() => _homeScreenState();

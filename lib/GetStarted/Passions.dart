@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:interested/GetStarted/College.dart';
-import 'package:interested/Usefull/Buttons.dart';
-import 'package:interested/Usefull/Functions.dart';
+import 'package:Krishna/GetStarted/College.dart';
+import 'package:Krishna/Usefull/Buttons.dart';
+import 'package:Krishna/Usefull/Functions.dart';
 
 import '../Usefull/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,7 +10,7 @@ late _passionsState stateOfPassions;
 
 class passions extends StatefulWidget {
   Map data;
-  passions({Key? key,required this.data}) : super(key: key);
+  passions({Key? key, required this.data}) : super(key: key);
 
   @override
   State<passions> createState() {
@@ -29,20 +29,21 @@ class _passionsState extends State<passions> {
   List<String> sPassions = [];
   List<dynamic> citiesNames = [];
 
-
   @override
   void initState() {
     getCities();
   }
 
   getCities() async {
-    setState((){
+    setState(() {
       isHide = true;
     });
     FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    QuerySnapshot querySnapshot =
-    await firestore.collection('CCI').where("id", isEqualTo: "passion").get();
+    QuerySnapshot querySnapshot = await firestore
+        .collection('CCI')
+        .where("id", isEqualTo: "passion")
+        .get();
 
     final allData = querySnapshot.docs.map((e) => e.data()).toList();
     var b = allData[0] as Map<String, dynamic>;
@@ -50,7 +51,9 @@ class _passionsState extends State<passions> {
     setState(() {
       citiesNames = b['all'];
       for (var x in citiesNames) {
-        var a = listItems(title:x,);
+        var a = listItems(
+          title: x,
+        );
         setState(() {
           citiesItems.add(a);
           isHide = false;
@@ -58,7 +61,6 @@ class _passionsState extends State<passions> {
       }
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -71,21 +73,27 @@ class _passionsState extends State<passions> {
               // circlesleft(context),
               dynamicCorners(context, Icons.star_border_outlined),
               SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 30.0,vertical: 20.0),
+                padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: 50.0,),
+                    SizedBox(
+                      height: 50.0,
+                    ),
 
                     mainText("Passions", mainColor, 35.0, FontWeight.normal, 1),
-                    SizedBox(height: 20.0,),
+                    SizedBox(
+                      height: 20.0,
+                    ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: selectedPassions,
                       ),
                     ),
-                    SizedBox(height: 20.0,),
+                    SizedBox(
+                      height: 20.0,
+                    ),
                     Container(
                       child: SingleChildScrollView(
                         child: Wrap(
@@ -96,9 +104,6 @@ class _passionsState extends State<passions> {
                         ),
                       ),
                     ),
-
-
-
 
                     // SizedBox(height: 20.0,),
                   ],
@@ -120,7 +125,7 @@ class _passionsState extends State<passions> {
 
 class listItems extends StatefulWidget {
   String title;
-  listItems({Key? key,required this.title}) : super(key: key);
+  listItems({Key? key, required this.title}) : super(key: key);
 
   @override
   State<listItems> createState() => _listItemsState();
@@ -134,42 +139,35 @@ class _listItemsState extends State<listItems> {
     return ElevatedButton(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
-        child: mainText(
-            widget.title, two, 13.0, FontWeight.normal,1),
+        child: mainText(widget.title, two, 13.0, FontWeight.normal, 1),
       ),
       style: ButtonStyle(
-          foregroundColor:
-          MaterialStateProperty.all<Color>(
-              bgs),
-          backgroundColor:
-          MaterialStateProperty.all<Color>(bgs),
-          shape: MaterialStateProperty.all<
-              RoundedRectangleBorder>(
+          foregroundColor: MaterialStateProperty.all<Color>(bgs),
+          backgroundColor: MaterialStateProperty.all<Color>(bgs),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                  borderRadius:
-                  BorderRadius.circular(15.0),
-                  side: BorderSide(color: two,width: 2.0)))),
-      onPressed: (){
-        setState((){
-          if(bgs == bgColor){
+                  borderRadius: BorderRadius.circular(15.0),
+                  side: BorderSide(color: two, width: 2.0)))),
+      onPressed: () {
+        setState(() {
+          if (bgs == bgColor) {
             bgs = mainColor;
             two = Colors.white;
-            stateOfPassions.setState((){
+            stateOfPassions.setState(() {
               stateOfPassions.sPassions.add(widget.title);
               stateOfPassions.selectedPassions = [];
-              for(var x in stateOfPassions.sPassions){
+              for (var x in stateOfPassions.sPassions) {
                 var a = newListItem(title: x);
                 stateOfPassions.selectedPassions.add(a);
               }
             });
-          }
-          else{
+          } else {
             bgs = bgColor;
             two = mainColor;
-            stateOfPassions.setState((){
+            stateOfPassions.setState(() {
               stateOfPassions.sPassions.remove(widget.title);
               stateOfPassions.selectedPassions = [];
-              for(var x in stateOfPassions.sPassions){
+              for (var x in stateOfPassions.sPassions) {
                 var a = newListItem(title: x);
                 stateOfPassions.selectedPassions.add(a);
               }
@@ -182,10 +180,9 @@ class _listItemsState extends State<listItems> {
   }
 }
 
-
 class newListItem extends StatefulWidget {
   String title;
-  newListItem({Key? key,required this.title}) : super(key: key);
+  newListItem({Key? key, required this.title}) : super(key: key);
 
   @override
   State<newListItem> createState() => _newListItemState();
@@ -200,22 +197,16 @@ class _newListItemState extends State<newListItem> {
     return ElevatedButton(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(1, 0, 1, 0),
-        child: mainText(
-            widget.title, two, 10.0, FontWeight.normal,1),
+        child: mainText(widget.title, two, 10.0, FontWeight.normal, 1),
       ),
       style: ButtonStyle(
-          foregroundColor:
-          MaterialStateProperty.all<Color>(
-              bgs),
-          backgroundColor:
-          MaterialStateProperty.all<Color>(bgs),
-          shape: MaterialStateProperty.all<
-              RoundedRectangleBorder>(
+          foregroundColor: MaterialStateProperty.all<Color>(bgs),
+          backgroundColor: MaterialStateProperty.all<Color>(bgs),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                  borderRadius:
-                  BorderRadius.circular(15.0),
-                  side: BorderSide(color: two,width: 1.0)))),
-      onPressed: (){
+                  borderRadius: BorderRadius.circular(15.0),
+                  side: BorderSide(color: two, width: 1.0)))),
+      onPressed: () {
         // navScreen(college(data: {'city':widget.title,'name':widget.name}), context, false);
       },
     );
